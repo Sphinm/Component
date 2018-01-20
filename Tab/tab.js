@@ -60,6 +60,7 @@
             this.nbody.appendChild(this.container);
             // 循环触发mouseenter和click 事件
             for (let i = 0; i<this.nTabs.length; i++) {
+                console.log(this.nTabs[i])
                 _.addEvent(this.nTabs[i],'click', function (index) {
                     this.setCurrent(index)
                 }.bind(this,[i]));
@@ -79,17 +80,17 @@
 
 
     // ----------------------------------------------------------------------
-    // 暴露API:  Amd || Commonjs  || Global
-    // 支持commonjs
-    if (typeof exports === 'object') {
-        module.exports = Tabs;
-        // 支持amd
-    } else if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return Tabs;
-        });
-    } else {
-        // 直接暴露到全局
-        window.Tabs = Tabs;
+        // 暴露API:  Amd || Commonjs  || Global
+        // 支持commonjs
+        if (typeof exports === 'object') {
+            module.exports = Tabs;
+            // 支持amd
+        } else if (typeof define === 'function' && define.amd) {
+            define(function() {
+                return Tabs;
+            });
+        } else {
+            // 直接暴露到全局
+            window.Tabs = Tabs;
     }
 })();

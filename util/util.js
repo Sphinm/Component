@@ -53,7 +53,6 @@
 
          // 属性赋值
     _.extend = function (o1,o2){
-            // console.log(o1)
         for (var i in o2) if (typeof o1[i] === 'undefined') {
                 o1[i] = o2[i];
             }
