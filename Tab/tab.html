@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab组件</title>
+    <link rel="stylesheet" href="tab.css">
+    <script src="util.js"></script>
+    <script src="tab.js"></script>
+</head>
+<body>
+    <!-- 顶栏 -->
+    <div class="g-header">
+        <div class="m-tabs"></div>
+    </div>
+
+    <script>
+        <!-- 初始化Tab组件 -->
+       let tab = new Tabs();
+        tab.on('highlight', function () {
+            console.log('触发highlight事件');
+        })
+    </script>
+</body>
+</html>
