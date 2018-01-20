@@ -1,7 +1,7 @@
 
 # JavaScript 原生组件
 
-## Tab导航栏组件     
+## 1.Tab导航栏组件     
 > [效果预览](https://suminhohu.github.io/Component/Tab/tab.html)
 
 > 这是一个简单通用的导航栏组件，基本上每个网站都可以用的到，效果很简单，点击到相应的滑块导航到相应的页面，滑块变色，
