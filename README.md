@@ -1,5 +1,5 @@
 
-### JavaScript 原生组件
+# JavaScript 原生组件
 
 #### Tab导航栏组件     [点击预览](https://suminhohu.github.io/Component/Tab/tab.html)
 
