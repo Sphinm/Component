@@ -60,7 +60,6 @@
             this.nbody.appendChild(this.container);
             // 循环触发mouseenter和click 事件
             for (let i = 0; i<this.nTabs.length; i++) {
-                console.log(this.nTabs[i])
                 _.addEvent(this.nTabs[i],'click', function (index) {
                     this.setCurrent(index)
                 }.bind(this,[i]));
