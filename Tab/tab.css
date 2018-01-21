@@ -20,7 +20,7 @@ body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,微软雅�
 body{background-color: #efefef;}
 a,a:hover{color:#333;}
 
-
+/* Tab */
 .g-header{width: 100%;height: 100px;margin:0 auto;background: #fff}
 .g-header .m-tabs{display: flex;justify-content: center;align-items: center}
 .m-tab{position: relative;float: left;margin-top: 23px;width: 310px;height: 39px;}

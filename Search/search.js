@@ -28,15 +28,13 @@
         // 2.满足条件后，无论是回车还是点击button都进行搜索
 
         check: function (event) {
-            if (this.text.value.length === 0 || this.text.value.trim() === ''){
-                event.preventDefault()
-            }
+            if (this.text.value.length === 0 || this.text.value.trim() === '') event.preventDefault()
         },
 
         // 这里不需要单独为回车事件和点击事件单独写，直接在form表单设置submit事件即可
+        // 由于button在sbody里面 所以需要在外层设置submit事件
         initSearch:function () {
             this.sbody.appendChild(this.container);
-            // 由于button在sbody里面 所以需要在外层设置submit事件
             _.addEvent(this.sbody,'submit',function (event) {
                 this.check(event)
             }.bind(this))
