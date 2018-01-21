@@ -11,4 +11,12 @@
 ![image.png](http://upload-images.jianshu.io/upload_images/1394028-5c5170a2050d8759.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![image.png](http://upload-images.jianshu.io/upload_images/1394028-b3c8b8c7e4f11dfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-   
+
+## 2.Search搜索框组件  
+> [效果预览](https://suminhohu.github.io/Component/Search/search.html)
+
+> 搜索框是一个很通用的功能，主要以实用为主，这里为了展示效果我跳到了百度搜索
+> 这里需要和后台交互，所以使用form表单提交，方法的话只需要进行form表单的验证即可
+
+![image.png](http://upload-images.jianshu.io/upload_images/1394028-f276b2064eefa0a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](http://upload-images.jianshu.io/upload_images/1394028-0b71f12e3c40cf3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
