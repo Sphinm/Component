@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../util/reset.css">
+    <link rel="stylesheet" href="slider.css">
+    <script src="../util/util.js"></script>
+    <script src="slider.js"></script>
+</head>
+<body>
+    <!-- 轮播图 -->
+    <div class="g-body">
+        <div class="g-banner">
+            <!-- g-banner 轮播区域 -->
+            <!-- 轮播组件 m-slider 及对应的 圆点指示器 m-cursor-->
+            <ul class="m-cursor f-cb">
+                <li class='cursor'></li>
+                <li class='cursor'></li>
+                <li class='cursor'></li>
+            </ul>
+            <div class="arrow" id="prev"><</div>
+            <div class="arrow" id="next">></div>
+        </div>
+    </div>
+
+
+    <script>
+
+    // 轮播图初始化过程
+
+    var cursors = document.querySelectorAll('.m-cursor .cursor');
+    var prev = document.querySelectorAll('.g-banner #prev')[0];
+    var next = document.querySelectorAll('.g-banner #next')[0];
+
+    var slider = new Slider({
+        //视口容器
+        container: document.querySelector('.g-banner'),
+        // 是否允许拖拽
+        drag: true,
+        // 是否自动轮播
+        auto: true
+    });
+
+    cursors.forEach(function (cursor, index) {
+        cursor.addEventListener('click', function () {
+            slider.nav(index);
+        })
+    });
+
+    prev.addEventListener('click', function () {
+        slider.prev();
+    });
+    next.addEventListener('click', function () {
+        slider.next();
+    });
+
+    // 每次slider图片位置变化，cursor也变化，增加监听处理
+    slider.on('nav', function (ev) {
+        var pageIndex = ev.pageIndex;
+        cursors.forEach(function (cursor, index) {
+            if (index === pageIndex) {
+                cursor.className = 'z-active';
+                cursor.style.backgroundColor = '#5ed0ba';
+            } else {
+                cursor.className = '';
+                cursor.style.backgroundColor = '#dedfdf';
+            }
+        })
+    });
+
+    // 从当前页开始轮播
+    slider.nav(3);
+
+    </script>
+</body>
+</html>
