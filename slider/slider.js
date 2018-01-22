@@ -5,22 +5,27 @@
 (function(){
 
     var template =
-        '<div class="m-slider" >\
-          <div class="slide"></div>\
-          <div class="slide"></div>\
-          <div class="slide"></div>\
-        </div>';
+        `<div class="m-slider" >
+          <div class="slide"></div>
+          <div class="slide"></div>
+          <div class="slide"></div>
+        </div>`;
 
     function Slider(opt){
         _.extend(this, opt);
 
+        // 容器节点，如果没有传入container，默认为body节点，
+        // 强制设置hidden样式
         this.container =  this.container || document.body;
         this.container.style.overflow = 'hidden';
+
         // 组件节点，并转换为数组
         this.slider = this._layout.cloneNode(true);
-        this.slides = Array.prototype.slice.call(this.slider.querySelectorAll('.slide'));
+        this.slides = [].slice.call(this.slider.querySelectorAll('.slide'));
+
         // 根据节点显示当前图片的数量
         this.showNum = this.slides.length;
+
         // 拖拽相关
         this.offsetWidth = this.container.offsetWidth;
         this.breakPoint = this.offsetWidth / this.showNum;
@@ -44,10 +49,12 @@
             this.intervalTime = this.intervalTime || 5000;
             this._initAuto();
         }
+
         // 如果需要拖拽切换
         if(this.drag) this._initDrag();
     }
 
+    // 事件发射器
     _.extend( Slider.prototype, _.emitter );
 
     _.extend( Slider.prototype, {
@@ -62,6 +69,7 @@
             this.slider.style.transitionDuration = '0s';
             this._calcSlide();
         },
+
         // 下一页
         next: function(){
             this._step(1);
@@ -90,7 +98,6 @@
             var offsetAll = this.offsetAll;
             var slides = this.slides;
 
-
             // 三个slide的偏移
             slides[slideIndex].style.left = (offsetAll) * 100 + '%';
             slides[prevslideIndex].style.left = (offsetAll-1) * 100 + '%';
@@ -99,6 +106,7 @@
             this._fadeIn(slides[slideIndex]);
 
             // 容器偏移
+            // translateZ(0) 触发硬件加速
             this.slider.style.transform = 'translateX('+ (-offsetAll * 100)+'%) translateZ(0)';
 
             // 当前slide 添加 'z-active'的className
@@ -131,19 +139,19 @@
             return (len + index) % len
         },
 
-        // 跳转时完成的逻辑， 这里是设置图片的url
+        // 跳转时完成的逻辑，这里是设置图片的url
         _onNav: function(pageIndex, slideIndex){
             var slides = this.slides;
 
             // 图片下标和slide下标由0开始
             for(var i =-1; i<= this.showNum-1; i++){
-                var index = this._normIndex((slideIndex+i),this.showNum);
+                var index = this._normIndex((slideIndex+i), this.showNum);
                 var img = slides[index].querySelector('img');
                 if(!img){
                     img = document.createElement('img');
                     slides[index].appendChild(img);
                 }
-                img.src = '../img/banner' + ( this._normIndex(pageIndex + i, this.pageNum) + 1 ) + '.jpg';
+                img.src = '../img/banner' + (this._normIndex(pageIndex + i, this.pageNum) + 1 ) + '.jpg';
             }
 
             // 触发nav事件
@@ -157,20 +165,23 @@
         _initAuto: function() {
             this.timmer = null;
             this.autoStart();
-            _.addEvent(this.slider,"mouseenter", this._autoEnd.bind(this));
-            _.addEvent(this.slider,"mouseleave", this._autoStart.bind(this));
+            _.addEvent(this.slider, "mouseenter", this._autoEnd.bind(this));
+            _.addEvent(this.slider, "mouseleave", this._autoStart.bind(this));
         },
+
         _autoStart: function() {
             var time = this.intervalTime;
             // 为防止也越来越快，在重复调用时，先清除
             clearInterval(this.timmer);
-            this.timmer = setInterval(this._step.bind(this,1), time);
+            this.timmer = setInterval(this._step.bind(this, 1), time);
         },
+
         _autoEnd: function() {
             var timmer = this.timmer;
             if(!timmer) return;
             clearInterval(this.timmer);
         },
+
         // 自动轮播
         autoStart: function(time) {
             this.intervalTime = time || this.intervalTime;
@@ -180,12 +191,13 @@
         // 拖拽
         _initDrag: function(){
             this._dragInfo = {};
-            _.addEvent(this.slider,'mousedown', this._dragstart.bind(this));
-            _.addEvent(this.slider,'mousemove', this._dragmove.bind(this));
-            _.addEvent(this.slider,'mouseup', this._dragend.bind(this));
-            _.addEvent(this.slider,'mouseleave', this._dragend.bind(this));
+            _.addEvent(this.slider, 'mousedown', this._dragstart.bind(this));
+            _.addEvent(this.slider, 'mousemove', this._dragmove.bind(this));
+            _.addEvent(this.slider, 'mouseup', this._dragend.bind(this));
+            _.addEvent(this.slider, 'mouseleave', this._dragend.bind(this));
         },
 
+        // 阻止默认事件是为了防止拖出视口容器
         _dragstart: function(ev){
             var dragInfo = this._dragInfo;
             dragInfo.start = {x: ev.pageX, y: ev.pageY};
@@ -199,19 +211,21 @@
             ev.preventDefault();
             this.slider.style.transitionDuration = '0s';
 
-            var start = dragInfo.start;
             // 清除恼人的选区
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
             } else if (window.document.selection) {
                 window.document.selection.empty();
             }
+
+            var start = dragInfo.start;
             // 加translateZ 分量是为了触发硬件加速
             this.slider.style.transform =
                 'translateX(' +  (-(this.offsetWidth * this.offsetAll - ev.pageX+start.x)) + 'px) translateZ(0)'
 
         },
 
+        // 通过步长判断图片是否翻页
         _dragend: function( ev ){
             var dragInfo = this._dragInfo;
             if(!dragInfo.start) return;
