@@ -1,8 +1,9 @@
 /**
  * 轮播图组件
- *
+ * 添加轮播图需要添加img和cursor，可否只添加img
  * 根据图片的数量设定指示器节点的数量是否合理？
  * 如果需要很多图做轮播呢？
+ *
  * */
 
 (function(){
@@ -175,11 +176,13 @@
 
         },
 
+        // 点击事件和鼠标移入时候停止计时，移出传送带再开始计时
         _initAuto: function() {
             this.timmer = null;
             this.autoStart();
-            _.addEvent(this.slider, "mouseenter", this._autoEnd.bind(this));
-            _.addEvent(this.slider, "mouseleave", this._autoStart.bind(this));
+            _.addEvent(this.container, 'click', this._autoEnd.bind(this));
+            _.addEvent(this.slider, 'mouseenter', this._autoEnd.bind(this));
+            _.addEvent(this.slider, 'mouseleave', this._autoStart.bind(this));
         },
 
         _autoStart: function() {
