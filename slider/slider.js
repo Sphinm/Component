@@ -26,14 +26,14 @@
 
         // 组件节点，并转换为数组
         this.slider = this._layout.cloneNode(true);
-        this.slides = [].slice.call(this.slider.querySelectorAll('.slide'));
+        this.slides = Array.prototype.slice.call(this.slider.querySelectorAll('.slide'));
 
-        // 根据节点显示当前图片的数量
+        // 节点的数量
         this.showNum = this.slides.length;
 
         // 拖拽相关
         this.offsetWidth = this.container.offsetWidth;
-        this.breakPoint = this.offsetWidth / this.showNum;
+        this.breakPoint = this.offsetWidth / 3;
 
 
         // 内部数据结构
@@ -48,9 +48,8 @@
         this.container.appendChild(this.slider);
 
 
-
-        // 轮播项数量
-        this.pageNum =  this.images? this.images.length : this.showNum;
+        // 轮播图数量
+        this.pageNum =  this.images.length;
 
         // 动画设置
         this.fadeTime = this.fadeTime || 500;
@@ -80,6 +79,7 @@
             this.offsetAll = pageIndex;
             this.slider.style.transitionDuration = '0s';
             this._calcSlide();
+
         },
 
         // 下一页
@@ -94,9 +94,10 @@
         _step: function(offset){
             this.offsetAll += offset;
             this.pageIndex += offset;
-            this.slideIndex +=offset;
+            this.slideIndex += offset;
             this.slider.style.transitionDuration = '0.5s';
             this._calcSlide();
+
         },
         // 执行Slide
         // 每个slide的left = (offsetAll + offset(1, -1)) * 100%;
@@ -104,11 +105,12 @@
         _calcSlide: function(){
             var showNum = this.showNum;
             var pageIndex = this.pageIndex= this._normIndex(this.pageIndex, this.pageNum);
-            var slideIndex = this.slideIndex= this._normIndex(this.slideIndex, this.showNum);
-            var prevslideIndex = this._normIndex(this.slideIndex-1,showNum);
-            var nextslideIndex = this._normIndex(this.slideIndex+1,showNum);
+            var slideIndex = this.slideIndex= this._normIndex(this.slideIndex, showNum);
             var offsetAll = this.offsetAll;
             var slides = this.slides;
+
+            var prevslideIndex = this._normIndex(slideIndex - 1, showNum);
+            var nextslideIndex = this._normIndex(slideIndex + 1, showNum);
 
             // 三个slide的偏移
             slides[slideIndex].style.left = (offsetAll) * 100 + '%';
@@ -157,7 +159,7 @@
             var slides = this.slides;
 
             // 图片下标和slide下标由0开始
-            for(var i =-1; i<= this.showNum-1; i++){
+            for(var i =-1; i<= 1; i++){
                 var index = this._normIndex((slideIndex+i), this.showNum);
                 var img = slides[index].querySelector('img');
                 if(!img){
@@ -203,6 +205,8 @@
             this.intervalTime = time || this.intervalTime;
             this._autoStart();
         },
+
+
 
         // 拖拽
         _initDrag: function(){
@@ -254,7 +258,7 @@
             // 看走了多少距离
             var deltX = pageX - start.x;
             if( Math.abs(deltX) > this.breakPoint ){
-                this._step(deltX>0? -1: 1)
+                this._step(deltX > 0 ? -1 : 1)
             }else{
                 this._step(0)
             }

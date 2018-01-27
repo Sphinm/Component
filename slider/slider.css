@@ -8,7 +8,7 @@ body{background-color: #e3e5e3}
 .g-banner .m-slider .slide a:hover{cursor:pointer;}
 .g-banner .m-slider .slide img{position:absolute;left:50%;top: 50%; width:100%; transform: translate(-50%, -50%);}
 /* 轮播图指示器 */
-.g-banner .m-cursor{position:absolute;bottom:15px;left:50%;z-index:1;padding-right:20px; background-color: #9c9a98;border-radius: 20px;}
+.g-banner .m-cursor{position:absolute;bottom:15px;left:50%;transform:translate(-50%);z-index:1;padding-right:20px; background-color: #9c9a98;border-radius: 20px;}
 .g-banner .m-cursor li{display:inline-block;text-align:center; height:10px;width:10px;margin: 6px 0 5px 20px;border-radius:5px;}
 .g-banner .m-cursor li+li{margin-left:11px;}
 .g-banner .m-cursor li:hover{cursor:pointer;}
