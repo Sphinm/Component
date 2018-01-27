@@ -1,5 +1,8 @@
 /**
  * 轮播图组件
+ *
+ * 根据图片的数量设定指示器节点的数量是否合理？
+ * 如果需要很多图做轮播呢？
  * */
 
 (function(){
@@ -11,11 +14,12 @@
           <div class="slide"></div>
         </div>`;
 
+
     function Slider(opt){
         _.extend(this, opt);
 
         // 容器节点，如果没有传入container，默认为body节点，
-        // 强制设置hidden样式
+        // 强制设置视口hidden样式
         this.container =  this.container || document.body;
         this.container.style.overflow = 'hidden';
 
@@ -30,10 +34,11 @@
         this.offsetWidth = this.container.offsetWidth;
         this.breakPoint = this.offsetWidth / this.showNum;
 
-        // 轮播项数量
-        this.pageNum =  this.images? this.images.length : this.showNum;
 
         // 内部数据结构
+        // pageIndex[0~pageNum]: 当前图片下标
+        // slideIndex[0~2]: slide下标
+        // offsetAll: 容器(.m-slide)的偏移下标
         this.slideIndex = 1;
         this.pageIndex = this.pageIndex || 0;
         this.offsetAll = this.pageIndex;
@@ -41,21 +46,27 @@
         // 把dom节点渲染到HTML
         this.container.appendChild(this.slider);
 
+
+
+        // 轮播项数量
+        this.pageNum =  this.images? this.images.length : this.showNum;
+
         // 动画设置
         this.fadeTime = this.fadeTime || 500;
 
         // 响应鼠标移动上去暂停轮播事件移出后重新计时
+        // 根据需要手动设定
         if(this.auto) {
             this.intervalTime = this.intervalTime || 5000;
             this._initAuto();
         }
 
-        // 如果需要拖拽切换
+        // 如果需要拖拽切换，根据需要手动设定
         if(this.drag) this._initDrag();
     }
 
     // 事件发射器
-    _.extend( Slider.prototype, _.emitter );
+    _.extend( Slider.prototype, _.emitter);
 
     _.extend( Slider.prototype, {
 
@@ -103,6 +114,7 @@
             slides[prevslideIndex].style.left = (offsetAll-1) * 100 + '%';
             slides[nextslideIndex].style.left = (offsetAll+1) * 100 + '%';
 
+            // 设置动画
             this._fadeIn(slides[slideIndex]);
 
             // 容器偏移
@@ -124,7 +136,7 @@
             if (parseFloat(ele.style.opacity)) {
                 ele.style.opacity = 0;
             }
-            function step () {
+            function step() {
                 if (parseFloat(ele.style.opacity)+stepLength < 1) {
                     ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
                 } else {
@@ -151,7 +163,8 @@
                     img = document.createElement('img');
                     slides[index].appendChild(img);
                 }
-                img.src = '../img/banner' + (this._normIndex(pageIndex + i, this.pageNum) + 1 ) + '.jpg';
+
+                img.src = '../img/banner' + (this._normIndex(pageIndex + i, this.pageNum) + 1)  + '.jpg';
             }
 
             // 触发nav事件
@@ -198,6 +211,7 @@
         },
 
         // 阻止默认事件是为了防止拖出视口容器
+        // 记录初始坐标，transitionDuration设置为0s
         _dragstart: function(ev){
             var dragInfo = this._dragInfo;
             dragInfo.start = {x: ev.pageX, y: ev.pageY};
@@ -222,7 +236,6 @@
             // 加translateZ 分量是为了触发硬件加速
             this.slider.style.transform =
                 'translateX(' +  (-(this.offsetWidth * this.offsetAll - ev.pageX+start.x)) + 'px) translateZ(0)'
-
         },
 
         // 通过步长判断图片是否翻页

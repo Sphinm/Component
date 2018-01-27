@@ -14,7 +14,8 @@
         <div class="g-banner">
             <!-- g-banner 轮播区域 -->
             <!-- 轮播组件 m-slider 及对应的 圆点指示器 m-cursor-->
-            <ul class="m-cursor f-cb">
+            <ul class="m-cursor">
+                <li class='cursor'></li>
                 <li class='cursor'></li>
                 <li class='cursor'></li>
                 <li class='cursor'></li>
@@ -26,12 +27,10 @@
 
 
     <script>
-
     // 轮播图初始化过程
-
     var cursors = document.querySelectorAll('.m-cursor .cursor');
-    var prev = document.querySelectorAll('.g-banner #prev')[0];
-    var next = document.querySelectorAll('.g-banner #next')[0];
+    var prev = document.querySelector('#prev');
+    var next = document.querySelector('#next');
 
     var slider = new Slider({
         //视口容器
@@ -39,7 +38,16 @@
         // 是否允许拖拽
         drag: true,
         // 是否自动轮播
-        auto: true
+        auto: true,
+        // 设定动画时间0.5s
+        fadeTime: 500,
+        // 图片数量自定义
+        images: [
+            'img/banner1.jpg',
+            'img/banner2.jpg',
+            'img/banner3.jpg',
+            'img/banner4.jpg',
+        ]
     });
 
     cursors.forEach(function (cursor, index) {
@@ -70,7 +78,7 @@
     });
 
     // 从当前页开始轮播
-    slider.nav(3);
+    slider.nav(0);
 
     </script>
 </body>
