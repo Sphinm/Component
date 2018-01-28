@@ -32,11 +32,11 @@
 
     <script>
     // 轮播图初始化过程
-    var cursors = document.querySelectorAll('.m-cursor .cursor');
-    var prev = document.querySelector('#prev');
-    var next = document.querySelector('#next');
+    let cursors = document.querySelectorAll('.m-cursor .cursor');
+    let prev = document.querySelector('#prev');
+    let next = document.querySelector('#next');
 
-    var slider = new Slider({
+    let slider = new Slider({
         //视口容器
         container: document.querySelector('.g-banner'),
         // 是否允许拖拽
@@ -72,21 +72,21 @@
     });
 
     // 每次slider图片位置变化，cursor也变化，增加监听处理
-    slider.on('nav', function (ev) {
-        var pageIndex = ev.pageIndex;
+    slider.on('nav', function (event) {
+        let pageIndex = event.pageIndex;
         cursors.forEach(function (cursor, index) {
             if (index === pageIndex) {
-                cursor.className = 'z-active';
+                _.addClassName(cursor, 'z-active');
                 cursor.style.backgroundColor = '#5ed0ba';
             } else {
-                cursor.className = '';
+                _.delClassName(cursor, 'z-active');
                 cursor.style.backgroundColor = '#dedfdf';
             }
         })
     });
 
     // 从当前页开始轮播
-    slider.nav(0);
+    slider.nav(2);
 
     </script>
 </body>

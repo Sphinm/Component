@@ -1,14 +1,12 @@
 /**
  * 轮播图组件
- * 添加轮播图需要添加img和cursor，可否只添加img
- * 根据图片的数量设定指示器节点的数量是否合理？
- * 如果需要很多图做轮播呢？
- *
+ * 添加轮播图需要添加img和cursor
+ * 是否拖拽、是否自动轮播、动画时间、图片数量等
  * */
 
 (function(){
 
-    var template =
+    let template =
         `<div class="m-slider" >
           <div class="slide"></div>
           <div class="slide"></div>
@@ -26,7 +24,10 @@
 
         // 组件节点，并转换为数组
         this.slider = this._layout.cloneNode(true);
-        this.slides = Array.prototype.slice.call(this.slider.querySelectorAll('.slide'));
+        this.slides = [].slice.call(this.slider.querySelectorAll('.slide'));
+
+        // 轮播图数量
+        this.pageNum =  this.images.length;
 
         // 节点的数量
         this.showNum = this.slides.length;
@@ -39,7 +40,7 @@
         // 内部数据结构
         // pageIndex[0~pageNum]: 当前图片下标
         // slideIndex[0~2]: slide下标
-        // offsetAll: 容器(.m-slide)的偏移下标
+        // offsetAll: 传送带容器(.m-slide)相对视口的偏移下标
         this.slideIndex = 1;
         this.pageIndex = this.pageIndex || 0;
         this.offsetAll = this.pageIndex;
@@ -47,9 +48,6 @@
         // 把dom节点渲染到HTML
         this.container.appendChild(this.slider);
 
-
-        // 轮播图数量
-        this.pageNum =  this.images.length;
 
         // 动画设置
         this.fadeTime = this.fadeTime || 500;
@@ -72,6 +70,7 @@
 
         _layout: _.html2node(template),
 
+
         // 直接跳转到指定页
         nav: function(pageIndex){
             this.pageIndex = pageIndex;
@@ -79,7 +78,6 @@
             this.offsetAll = pageIndex;
             this.slider.style.transitionDuration = '0s';
             this._calcSlide();
-
         },
 
         // 下一页
@@ -97,20 +95,20 @@
             this.slideIndex += offset;
             this.slider.style.transitionDuration = '0.5s';
             this._calcSlide();
-
         },
+
         // 执行Slide
         // 每个slide的left = (offsetAll + offset(1, -1)) * 100%;
         // 外层容器 (.m-slider) 的偏移 = offsetAll * 宽度
         _calcSlide: function(){
-            var showNum = this.showNum;
-            var pageIndex = this.pageIndex= this._normIndex(this.pageIndex, this.pageNum);
-            var slideIndex = this.slideIndex= this._normIndex(this.slideIndex, showNum);
-            var offsetAll = this.offsetAll;
-            var slides = this.slides;
+            let showNum = this.showNum;
+            let pageIndex = this.pageIndex= this._normIndex(this.pageIndex, this.pageNum);
+            let slideIndex = this.slideIndex= this._normIndex(this.slideIndex, showNum);
+            let offsetAll = this.offsetAll;
+            let slides = this.slides;
 
-            var prevslideIndex = this._normIndex(slideIndex - 1, showNum);
-            var nextslideIndex = this._normIndex(slideIndex + 1, showNum);
+            let prevslideIndex = this._normIndex(slideIndex - 1, showNum);
+            let nextslideIndex = this._normIndex(slideIndex + 1, showNum);
 
             // 三个slide的偏移
             slides[slideIndex].style.left = (offsetAll) * 100 + '%';
@@ -134,8 +132,8 @@
 
         // 淡入效果
         _fadeIn: function(ele) {
-            var stepLength = 1/50;
-            var setIntervalId = setInterval(step, this.fadeTime/100);
+            let stepLength = 1/50;
+            let setIntervalId = setInterval(step, this.fadeTime/100);
             if (parseFloat(ele.style.opacity)) {
                 ele.style.opacity = 0;
             }
@@ -156,12 +154,12 @@
 
         // 跳转时完成的逻辑，这里是设置图片的url
         _onNav: function(pageIndex, slideIndex){
-            var slides = this.slides;
+            let slides = this.slides;
 
             // 图片下标和slide下标由0开始
-            for(var i =-1; i<= 1; i++){
-                var index = this._normIndex((slideIndex+i), this.showNum);
-                var img = slides[index].querySelector('img');
+            for(let i =-1; i<= 1; i++){
+                let index = this._normIndex((slideIndex+i), this.showNum);
+                let img = slides[index].querySelector('img');
                 if(!img){
                     img = document.createElement('img');
                     slides[index].appendChild(img);
@@ -188,14 +186,14 @@
         },
 
         _autoStart: function() {
-            var time = this.intervalTime;
+            let time = this.intervalTime;
             // 为防止也越来越快，在重复调用时，先清除
             clearInterval(this.timmer);
             this.timmer = setInterval(this._step.bind(this, 1), time);
         },
 
         _autoEnd: function() {
-            var timmer = this.timmer;
+            let timmer = this.timmer;
             if(!timmer) return;
             clearInterval(this.timmer);
         },
@@ -220,26 +218,25 @@
         // 阻止默认事件是为了防止拖出视口容器
         // 记录初始坐标，transitionDuration设置为0s
         _dragstart: function(ev){
-            var dragInfo = this._dragInfo;
+            let dragInfo = this._dragInfo;
             dragInfo.start = {x: ev.pageX, y: ev.pageY};
             ev.preventDefault();
         },
 
         _dragmove: function(ev){
-            var dragInfo = this._dragInfo;
+            let dragInfo = this._dragInfo;
             // 如果还没有开始拖拽则退出
             if(!dragInfo.start) return;
             ev.preventDefault();
             this.slider.style.transitionDuration = '0s';
-
-            // 清除恼人的选区
+            // 清除选区
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
             } else if (window.document.selection) {
                 window.document.selection.empty();
             }
 
-            var start = dragInfo.start;
+            let start = dragInfo.start;
             // 加translateZ 分量是为了触发硬件加速
             this.slider.style.transform =
                 'translateX(' +  (-(this.offsetWidth * this.offsetAll - ev.pageX+start.x)) + 'px) translateZ(0)'
@@ -247,16 +244,16 @@
 
         // 通过步长判断图片是否翻页
         _dragend: function( ev ){
-            var dragInfo = this._dragInfo;
+            let dragInfo = this._dragInfo;
             if(!dragInfo.start) return;
 
             ev.preventDefault();
-            var start = dragInfo.start;
+            let start = dragInfo.start;
             this._dragInfo = {};
-            var pageX = ev.pageX;
+            let pageX = ev.pageX;
 
             // 看走了多少距离
-            var deltX = pageX - start.x;
+            let deltX = pageX - start.x;
             if( Math.abs(deltX) > this.breakPoint ){
                 this._step(deltX > 0 ? -1 : 1)
             }else{
