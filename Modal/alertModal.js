@@ -11,7 +11,6 @@
 		<div class="modal_ct">
 			<p class="alert_msg"></p>
 			<button class="u-btn u-btn-primary submit_btn">确定</button>
-			<button class="u-btn u-btn-primary cancel_btn">取消</button>
 		</div>
 	</div>`;
 
@@ -26,17 +25,13 @@
         // 缓存节点
         this.alertMsg = this.container.querySelector('.alert_msg');
         this.submitBtn = this.container.querySelector('.submit_btn');
-        this.cancel = this.container.querySelector('.cancel_btn');
         this.closeBtn = this.container.querySelector('.close_btn');
 
         this.initModal();
     }
 
-    // 通过原型式继承会不会有什么问题？
-    // 原型式继承得到的对象和对象属性浅拷贝得到的对象完全一致，让我比较困惑，后者也属于继承吗？如果不是的话有什么区别呢？
+    // 通过原型式继承会导致AlertModal.prototype.constructor === Modal，需要手动指回去
     AlertModal.prototype = Object.create(Modal.prototype);
-    console.log(AlertModal.prototype);
-    console.log(_.extend(AlertModal.prototype, Modal.prototype));
 
     // 事件触发器
     _.extend(AlertModal.prototype, _.emitter);
@@ -47,8 +42,7 @@
            this.on('alert', this.showMsg.bind(this));
 
            _.addEvent(this.closeBtn, 'click', this.hide.bind(this));
-           _.addEvent(this.submitBtn, 'click', this.hide.bind(this));
-           _.addEvent(this.cancel, 'click', this.hide.bind(this));
+           _.addEvent(this.submitBtn, 'click', this.success.bind(this));
        },
 
         showMsg: function (msg) {

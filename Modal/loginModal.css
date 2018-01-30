@@ -1,0 +1,24 @@
+/* login modal */
+.m-modal{height:100%;width:100%;position:fixed;left:0;top:0;background: #aaa;text-align:center;color:#aaa;z-index:100;display: flex;align-items: center;justify-content: center;}
+.m-modal .modal-cnt{width: 408px;height:321px;border-radius:3px;overflow:hidden;background: #fff;box-shadow:2px 2px 5px rgba(0,0,0,0.2);}
+.m-modal .modal-tt{width: 408px;height:90px;text-align:left;}
+.m-modal .modal-tt strong{display:inline-block;margin: 40px 0 25px 32px;font-size: 20px;color: #5ed0ba;font-weight: normal}
+.m-modal .modal-tt span{display:inline-block;margin: 45px  0 25px 135px;color: #999;}
+.m-modal .modal-tt .modal-cancel{float: right;width:16px;height:16px;margin:10px 10px 0 0;background:url(../img/small.png) no-repeat 0 -88px;}
+.m-modal .modal-tt .modal-cancel:hover{cursor: pointer;}
+.m-modal .modal-tt .u-link{color: #5ed0ba;padding-right: -13px;}
+.m-modal .m-form{width: 408px;height:231px;}
+.m-modal .m-form .u-input{width: 330px;height: 38px;border: 1px solid #a5f1e1;border-radius:3px;margin-bottom: 12px;}
+.m-modal .m-form .u-input.error{border-color: #fa5b5b;}
+.m-modal .m-form input{padding-left: 15px;}
+.m-modal .m-form .u-input::-webkit-input-placeholder{color: #a5f1e1;}
+.m-modal .m-form .u-check{position:relative;display: inline-block;float: left;margin-left: 32px;cursor: pointer}
+.m-modal .m-form .u-check .u-checkbox{position:absolute;-webkit-appearance: none;}
+.m-modal .m-form .u-check .u-checkbox+label{display: inline-block;width: 13px;height: 13px;border: 1px solid #a5f1e1;border-radius: 3px;}
+.m-modal .m-form .u-check .u-checkbox:checked+label:after{content: "";position: absolute;left: 1px;bottom: 10px;width: 9px;height: 4px; border: 2px solid #5ed0ba;border-top-color: transparent;border-right-color: transparent;  transform: rotate(-45deg);}
+.m-modal .m-form .u-check .keep-login{margin-left: 9px;}
+.m-modal .m-form .f-forget{float: right;margin:6px 28px;}
+.m-modal .m-form .f-forget .u-link{color: #999;}
+.m-modal .m-form .u-error{height: 14px;margin: 24px 0 12px 32px;text-align: left;color: #fa5b5b;}
+.m-modal .m-form .u-error .u-icon-error{display:inline-block;width: 14px;height: 13px;background: url("../img/small.png") no-repeat 0 -48px;}
+.m-modal .m-form .u-btn-primary{width: 344px;height: 39px;margin:4px;background: #5ed0ba;border-radius:3px;border: 0;color: #fff;font-size: 14px;}

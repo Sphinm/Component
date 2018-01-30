@@ -15,8 +15,16 @@
         parent: document.body,
     });
 
-    // 触发alert事件
-    alert.emit('alert', '我是Alert弹窗')
+    // 触发事件
+    alert.emit('alert', '我是Alert弹窗');
+
+    alert.on('hide', function () {
+       console.log('触发hide事件')
+   });
+   alert.on('success', function () {
+       console.log('触发success事件')
+   })
+
 </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 /**
  * 通用弹窗组件，提供给其他业务弹窗继承使用
- * 这里只提供基本的边框样式和隐藏显示功能
+ * 这里只提供基本的边框样式和隐藏显示功能以及父容器
  *
- * 业务弹窗提供父容器以及相应的内容(自定义)
+ * 业务弹窗提供相应的内容(自定义)和功能
  * */
 
 (function () {
@@ -17,14 +17,21 @@
         this.parent.appendChild(this.container);
     }
 
+    _.extend(Modal.prototype, _.emitter);
     _.extend(Modal.prototype, {
 
         show: function () {
-            _.delClassName(this.container, 'f-dn')
+            _.delClassName(this.container, 'f-dn');
         },
 
         hide: function () {
-            _.addClassName(this.container, 'f-dn')
+            _.addClassName(this.container, 'f-dn');
+            this.emit('hide');
+        },
+
+        success: function () {
+            this.emit('success');
+            this.hide();
         }
 
     });

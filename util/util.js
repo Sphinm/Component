@@ -51,7 +51,7 @@
             return container.children[0];
         };
 
-         // 属性赋值，通过浅拷贝，
+         // 属性赋值，通过浅拷贝
     _.extend = function (o1,o2){
         for (var i in o2) if (typeof o1[i] === 'undefined') {
                 o1[i] = o2[i];
