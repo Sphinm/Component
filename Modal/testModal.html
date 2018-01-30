@@ -5,11 +5,9 @@
     <title>BaseModal</title>
     <link rel="stylesheet" href="../util/reset.css">
     <link rel="stylesheet" href="baseModal.css">
-    <link rel="stylesheet" href="loginModal.css">
     <script src="../util/util.js"></script>
     <script src="baseModal.js"></script>
     <script src="alertModal.js"></script>
-    <script src="loginModal.js"></script>
 </head>
 <body>
 <script>
@@ -28,12 +26,6 @@
        console.log('触发success事件')
    });
 
-
-    // 登录弹窗
-    let login = new LoginModal();
-    login.on('showRegisterModal', function () {
-        console.log('触发 showRegisterModal 事件')
-    })
 
 </script>
 </body>
