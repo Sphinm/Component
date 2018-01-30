@@ -32,6 +32,7 @@
 
     // 通过原型式继承会导致AlertModal.prototype.constructor === Modal，需要手动指回去
     AlertModal.prototype = Object.create(Modal.prototype);
+    AlertModal.prototype.constructor = AlertModal;
 
     // 事件触发器
     _.extend(AlertModal.prototype, _.emitter);

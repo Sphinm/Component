@@ -7,32 +7,23 @@
     <link rel="stylesheet" href="baseModal.css">
     <link rel="stylesheet" href="loginModal.css">
     <script src="../util/util.js"></script>
+    <script src="../util/md5.js"></script>
     <script src="baseModal.js"></script>
-    <script src="alertModal.js"></script>
     <script src="loginModal.js"></script>
 </head>
 <body>
 <script>
-    // alert弹窗
-   let alert = new AlertModal({
-        parent: document.body
-    });
-
-    // 触发事件
-    alert.emit('alert', '我是Alert弹窗');
-
-    alert.on('hide', function () {
-       console.log('触发hide事件')
-   });
-   alert.on('success', function () {
-       console.log('触发success事件')
-   });
-
 
     // 登录弹窗
-    let login = new LoginModal();
+    let login = new LoginModal({
+        parent: document.body
+    });
     login.on('showRegisterModal', function () {
-        console.log('触发 showRegisterModal 事件')
+        console.log('触发 RegisterModal 事件')
+        alert('仅做演示，这里不实现注册弹窗')
+    });
+    login.on('showLoginModal', function () {
+        console.log('触发 LoginModal 事件')
     })
 
 </script>

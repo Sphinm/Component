@@ -11,10 +11,10 @@
 .m-modal .m-form .u-input{width: 330px;height: 38px;border: 1px solid #a5f1e1;border-radius:3px;margin-bottom: 12px;}
 .m-modal .m-form .u-input.error{border-color: #fa5b5b;}
 .m-modal .m-form input{padding-left: 15px;}
-.m-modal .m-form .u-input::-webkit-input-placeholder{color: #a5f1e1;}
+.m-modal .m-form .u-input::-webkit-input-placeholder{color: #5ed0ba;}
 .m-modal .m-form .u-check{position:relative;display: inline-block;float: left;margin-left: 32px;cursor: pointer}
 .m-modal .m-form .u-check .u-checkbox{position:absolute;-webkit-appearance: none;}
-.m-modal .m-form .u-check .u-checkbox+label{display: inline-block;width: 13px;height: 13px;border: 1px solid #a5f1e1;border-radius: 3px;}
+.m-modal .m-form .u-check .u-checkbox+label{display: inline-block;width: 13px;height: 13px;border: 1px solid #5ed0ba;border-radius: 3px;}
 .m-modal .m-form .u-check .u-checkbox:checked+label:after{content: "";position: absolute;left: 1px;bottom: 10px;width: 9px;height: 4px; border: 2px solid #5ed0ba;border-top-color: transparent;border-right-color: transparent;  transform: rotate(-45deg);}
 .m-modal .m-form .u-check .keep-login{margin-left: 9px;}
 .m-modal .m-form .f-forget{float: right;margin:6px 28px;}
