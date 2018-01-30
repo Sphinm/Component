@@ -8,4 +8,4 @@
 + [Tab导航栏组件介绍](https://github.com/suminhohu/Component/issues/1)      
 + [Search搜索框组件](https://github.com/suminhohu/Component/issues/2)  
 + [实现可复用slider轮播图组件](https://github.com/suminhohu/Component/issues/5)
-+ [弹窗组件由浅入深](https://github.com/suminhohu/Component/issues/6)
++ [弹窗组件由浅入深的小白分析 ](https://github.com/suminhohu/Component/issues/6)
