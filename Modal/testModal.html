@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BaseModal</title>
+    <link rel="stylesheet" href="../util/reset.css">
+    <link rel="stylesheet" href="baseModal.css">
+    <script src="../util/util.js"></script>
+    <script src="baseModal.js"></script>
+    <script src="alertModal.js"></script>
+</head>
+<body>
+<script>
+   let alert = new AlertModal({
+        parent: document.body,
+    });
+
+    // 触发alert事件
+    alert.emit('alert', '我是Alert弹窗')
+</script>
+</body>
+</html>
+

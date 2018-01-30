@@ -1,0 +1,9 @@
+.m-modal{position:fixed;z-index:999;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.2)}
+.m-modal > div{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid #e4e4e2;background:#fff;}
+.m-alertmodal{position:relative;width:408px;padding:10px 12px;border:1px solid #a8a8a8;box-sizing:border-box;border-radius: 5px;box-shadow:2px 2px 5px rgba(0,0,0,0.3)}
+.m-alertmodal .close_btn{float: right;width:16px;height:16px;margin:0 -3px;background:url("../img/small.png") no-repeat 0 -88px;cursor: pointer}
+.m-alertmodal .modal_tt{margin-bottom:10px;line-height:1em;color:#5ed0ba;font-size:15px;}
+.m-alertmodal .modal_ct{padding-top:5px;border-top:1px solid #e9eaea;text-align:center;}
+.m-alertmodal .modal_ct .alert_msg{font-size:15px;margin:10px 0 20px;}
+.m-alertmodal .modal_ct .submit_btn{width: 100px;height: 30px;margin:4px;background: #87dccc;border-radius:3px;border: 0;color: #fff;font-size: 14px;}
+.m-alertmodal .modal_ct .cancel_btn{width: 100px;height: 30px;border:1px solid #87dccc;margin:4px;background: #fff;border-radius:3px;color: #87dccc;font-size: 14px;}

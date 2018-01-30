@@ -19,3 +19,4 @@ del,ins,u,s,a,a:hover{text-decoration:none;}
 body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,微软雅黑;color:#333;outline:none;}
 body{background-color: #efefef;}
 a,a:hover{color:#333;}
+.f-dn{visibility: hidden;}
