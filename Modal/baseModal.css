@@ -5,5 +5,5 @@
 .m-alertmodal .modal_tt{margin-bottom:10px;line-height:1em;color:#5ed0ba;font-size:15px;}
 .m-alertmodal .modal_ct{padding-top:5px;border-top:1px solid #e9eaea;text-align:center;}
 .m-alertmodal .modal_ct .alert_msg{font-size:15px;margin:10px 0 20px;}
-.m-alertmodal .modal_ct .submit_btn{width: 100px;height: 30px;margin:4px;background: #87dccc;border-radius:3px;border: 0;color: #fff;font-size: 14px;}
-.m-alertmodal .modal_ct .cancel_btn{width: 100px;height: 30px;border:1px solid #87dccc;margin:4px;background: #fff;border-radius:3px;color: #87dccc;font-size: 14px;}
+.m-alertmodal .modal_ct .submit_btn{width: 100px;height: 30px;margin:4px;background: #5ed0ba;border-radius:3px;border: 0;color: #fff;font-size: 14px;}
+.m-alertmodal .modal_ct .cancel_btn{width: 100px;height: 30px;border:1px solid #5ed0ba;margin:4px;background: #fff;border-radius:3px;color: #5ed0ba;font-size: 14px;}
